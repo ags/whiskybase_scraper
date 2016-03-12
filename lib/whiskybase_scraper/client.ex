@@ -8,6 +8,7 @@ defmodule WhiskybaseScraper.Client do
       |> Enum.into(%{})
 
     whisky = %WhiskybaseScraper.Whisky{
+      id: id,
       age: attrs["Age"],
       bottler: attrs["Bottler"],
       bottling_serie: attrs["Bottling serie"],

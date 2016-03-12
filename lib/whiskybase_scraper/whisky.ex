@@ -1,5 +1,6 @@
 defmodule WhiskybaseScraper.Whisky do
   defstruct [
+    :id,
     :age,
     :bottler,
     :bottling_serie,
