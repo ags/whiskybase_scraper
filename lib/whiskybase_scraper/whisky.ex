@@ -4,7 +4,7 @@ defmodule WhiskybaseScraper.Whisky do
     :bottler,
     :bottling_serie,
     :brand_name,
-    :casktype,
+    :cask_type,
     :distillery,
     :district,
     :image_url,

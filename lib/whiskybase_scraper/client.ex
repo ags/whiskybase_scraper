@@ -12,7 +12,7 @@ defmodule WhiskybaseScraper.Client do
       bottler: attrs["Bottler"],
       bottling_serie: attrs["Bottling serie"],
       brand_name: text_from_selector(body, ".whisky-brandname"),
-      casktype: attrs["Casktype"],
+      cask_type: attrs["Casktype"],
       distillery: attrs["Distillery"],
       district: attrs["District"],
       image_url: image_src(body),
