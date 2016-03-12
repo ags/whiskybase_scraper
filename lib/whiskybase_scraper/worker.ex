@@ -14,6 +14,7 @@ defmodule WhiskybaseScraper.Worker do
   # Server
 
   def handle_call({:scrape, whisky_id}, _from, state) do
-    {:reply, WhiskybaseScraper.Client.get(whisky_id), state}
+    result = WhiskybaseScraper.Client.get(whisky_id)
+    {:reply, result, state}
   end
 end

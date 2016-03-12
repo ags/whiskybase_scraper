@@ -4,15 +4,39 @@ defmodule WhiskybaseScraper do
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
-    children = [
-      worker(WhiskybaseScraper.Worker, [[name: :sup_worker]]),
+    poolboy_config = [
+      {:name, {:local, pool_name()}},
+      {:worker_module, WhiskybaseScraper.Worker},
+      {:size, 2},
+      {:max_overflow, 1}
     ]
 
-    opts = [strategy: :one_for_one, name: WhiskybaseScraper.Supervisor]
-    Supervisor.start_link(children, opts)
+    children = [
+      :poolboy.child_spec(pool_name(), poolboy_config, [])
+    ]
+
+    options = [
+      strategy: :one_for_one,
+      name: WhiskybaseScraper.Supervisor
+    ]
+
+    Supervisor.start_link(children, options)
+  end
+
+  def run(whisky_ids) do
+    Enum.each(
+      whisky_ids,
+      fn(id) -> spawn(fn() -> scrape(id) |> IO.inspect end) end
+    )
   end
 
   def scrape(whisky_id) do
-    WhiskybaseScraper.Worker.scrape(:sup_worker, whisky_id)
+    :poolboy.transaction(
+      pool_name(),
+      fn(pid) -> WhiskybaseScraper.Worker.scrape(pid, whisky_id) end,
+      :infinity
+    )
   end
+
+  def pool_name, do: :whiskybase_scraper_pool
 end

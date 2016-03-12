@@ -5,4 +5,5 @@
   "idna": {:hex, :idna, "1.1.0"},
   "mimerl": {:hex, :mimerl, "1.0.2"},
   "mochiweb": {:hex, :mochiweb, "2.12.2"},
+  "poolboy": {:hex, :poolboy, "1.5.1"},
   "ssl_verify_hostname": {:hex, :ssl_verify_hostname, "1.0.5"}}

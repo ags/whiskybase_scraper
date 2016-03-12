@@ -14,7 +14,7 @@ defmodule WhiskybaseScraper.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:httpoison],
+    [applications: [:httpoison, :poolboy],
      mod: {WhiskybaseScraper, []}]
   end
 
@@ -31,6 +31,7 @@ defmodule WhiskybaseScraper.Mixfile do
     [
       {:floki, "~> 0.7"},
       {:httpoison, "~> 0.8.0"},
+      {:poolboy, "~> 1.5"},
     ]
   end
 end
